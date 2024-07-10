@@ -1,0 +1,6 @@
+find out (a/b)%n;
+   (a/b)=a*(mod inverse of b);
+        =a*(b^n-2);
+        let mod inv of b=x=b^n-2         
+
+   so,(a/b)%n=(a%n)*(x%n)%n;

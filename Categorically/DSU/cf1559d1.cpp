@@ -1,0 +1,146 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define db double
+#define pb push_back
+#define mp make_pair
+#define Max 10000000000000000
+#define Min -10000000000000000
+#define gcd(a, b) __gcd(a, b)
+#define lcm(a, b) (a * (b / gcd(a, b)))
+using namespace std;
+ll M=1000000007;
+ll mod(ll x){
+        return ((x%M + M)%M);
+    }
+ll add(ll a, ll b){
+        return mod(mod(a)+mod(b));
+    }
+ll mul(ll a, ll b){
+        return mod(mod(a)*mod(b));
+    }
+ll powr(ll a,ll b){
+   if(b==0)
+      return 1;
+   if(b==1)
+      return a;
+   ll res=1;
+   while(b>0){
+    if(b&1){
+        res=mul(res,a);
+    }
+    b/=2;
+    a=mul(a,a);
+  }
+  return res;
+}
+bool cmp(pair<ll,ll>a,pair<ll,ll>b){
+   return a.second<b.second;
+}
+ll is[1000000];
+vector <ll> primes;
+void primegen(){
+    ll n,i,j,k,x,mx=1000000;
+    primes.push_back(2);
+    for(ll i=3;i<=mx;i+=2){
+        if(is[i]==0){
+         for(ll j=i*i;j<=mx;j+=2*i){
+          is[j]=1;
+         }
+       }
+    }
+    //cout<<"2"<<endl;
+    for(ll i=3;i<=mx;i+=2){
+        if(is[i]==0)
+            //cout<<i<<endl;
+            primes.push_back(i);
+    }
+}
+ll ncr(ll x,ll y){
+   ll ans=1,s=1;
+    while(s<=y){
+         //   cout<<ans<<endl;
+        ans*=(x-s+1);
+        ans/=s;
+        s++;
+    }
+  return ans;
+}
+ll par1[1005],par2[1005];
+ll findpar1(ll x){
+    if(par1[x]==x)
+        return x;
+    return par1[x]=findpar1(par1[x]);
+}
+ll findpar2(ll x){
+    if(par2[x]==x)
+        return x;
+    return par2[x]=findpar2(par2[x]);
+}
+void unite1(ll d,ll e){
+    par1[e]=d;
+}
+void unite2(ll d,ll e){
+    par2[e]=d;
+}
+void solve()
+{
+  ll n,m1,m2;
+   cin>>n>>m1>>m2;
+   for(ll i=1;i<=n;i++){
+       par1[i]=i;
+       par2[i]=i;
+   }
+   //vector <ll> a(n);
+   for(ll i=0;i<m1;i++){
+    ll x,y;
+    cin>>x>>y;
+    unite1(findpar1(x),findpar1(y));
+   }
+    for(ll i=0;i<m2;i++){
+    ll x,y;
+    cin>>x>>y;
+     unite2(findpar2(x),findpar2(y));
+   }
+  // cout<<"par"<<par2[6]<<' '<<par2[1]<<endl;
+   vector <pair<ll,ll>> ans;
+   for(ll i=1;i<=n;i++){
+       for(ll j=i+1;j<=n;j++){
+           ll x1=findpar1(i);
+           ll y1=findpar1(j);
+           ll x2=findpar2(i); 
+           ll y2=findpar2(j);
+         //  cout<<x1<<' '<<y1<<' '<<x2<<' '<<y2<<endl; 
+            if((x1!=y1)&&(x2!=y2)){
+             ans.pb({i,j});
+             unite1(findpar1(i),findpar1(j));
+             unite2(findpar2(i),findpar2(j));
+            }
+       }
+   }
+   cout<<ans.size()<<endl;;
+   for(auto it:ans)
+      cout<<it.first<<' '<<it.second<<endl; 
+
+  //ll  a[100005];
+  /*for(ll i=0;i<n;i++){
+   cin>>a[i];
+  }*/
+ // string s1;
+ // cin>>s1;
+}
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    freopen("i.txt","r",stdin);
+    //freopen("o.txt","w",stdout);
+    int t=1;
+  //  cin>>t;
+    for(int i=1;i<=t;i++){
+      //  cout<<"Case "<<i<<":"<<' ';
+      // cout<<setprecision(15);
+        solve();
+    }
+    return 0;
+}

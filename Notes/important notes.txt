@@ -1,0 +1,88 @@
+1.last element of vector can be found by v.back()...can be removed by v.pop_back()...
+
+2.in 2d char array indexing cant be done using long long
+
+3.memset(a,0,size_of(a))....never use numbers instead size_of.......vector<int> v(5);//auto initialized with 0...
+
+4.sorting vector of pair
+    
+    bool cmp(pair<char,ll>x,pair<char,ll>y){
+    return (x.second>y.second);
+}
+int main(){
+   sort(v.begin(),v.end(),cmp);
+}
+5 facing segment and max,min situation!!!
+     think about applying set/multiset
+6.1.division/root cannot be used upon double values.
+    so.we must design the program such a way that we dont have to use root...
+     (using multiplication/squaring both side during comparaing)
+
+7.string has back operation......string s;
+                                 cin>>s;
+                                 char ch=s.back();
+8.6c4=(6*5*4*3)/4!
+
+9.number of contiguoes substring n*(n+1)/2;
+
+10.number of subsequence (2^n)-1;
+
+11.The Chicken McNugget Theorem (or Postage Stamp Problem or Frobenius Coin Problem) 
+   states that for any two relatively prime positive integers m,n the greatest 
+   integer that cannot be written in the form am + bn for nonnegative 
+   integers a,b is mn-m-n.
+
+12.if x*y is a square number...x=a^(p)*b^(q)...(prime factorization)
+                               y=c^(r)*d^(s)...
+                               x1=a^(p%2)*b^(q%2);  
+                               y1=c^(r%2)*d^(s%2)
+    then x1==y1;
+
+
+13. if x-y is divided by m..then x%m==y%m...
+
+14.(x,y) and (x1,y1) intersect if max(x,x1)<=min(y,y1);
+
+15.1+k+k^2+k^3.......=1/(1-k);
+
+**max number of divisors of a number 
+    for 10^9 is 16*16
+    for 10^18 is 32*32
+
+16.string s1=s.substr(3,2);
+    input : s="abcde";
+    output: s1="de";
+   so here 3 is starting index and 2 is length of substring u want.
+17.for(auto [f,s]:st)
+        cout<<f<<' '<<s<<endl;    //st is a pair of set.
+
+
+18.set of pair:
+              pair<ll,ll> temp;    
+               temp=*st1.begin();
+               cout<<temp.first<<' ';
+               st1.erase(temp);
+               auto it=st2.find(temp);
+               st2.erase(it);
+19.                                      
+
+                                           Bit_Manipulation:
+1.to set ith bit...1<<i;
+2.to check ith bit of x....x&(1<<i)
+3.x is a power of two if it has only 1 bit set.
+X-OR:
+4.A^A=0...A^0=A...
+5.X-OR from L-R of an array=pre[L-1]^pre[R]...here pre is the prefix X-OR ..
+  
+
+20.if x is divisible by a,b,c....then x is divisible by lcm(a,b,c...);
+
+21.
+     Combinatorics:cf-1513b
+
+
+     ********************Stars and bars**********************
+    X+Y+Z=N......where x,y,z can be zero.....ans: c(n+k-1,k-1);
+    X+Y+Z=N......where x,y,z can't be zero.....ans: c(n-1,k-1);
+
+  

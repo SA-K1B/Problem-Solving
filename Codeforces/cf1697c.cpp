@@ -1,0 +1,177 @@
+#include<bits/stdc++.h>
+#define ll long long int
+#define db double
+#define pb push_back
+#define mp make_pair
+#define Max 1000000000000000000
+#define Min -1000000000000000000
+#define gcd(a, b) __gcd(a, b)
+#define lcm(a, b) (a * (b / gcd(a, b)))
+using namespace std;
+ll M=1000000007;
+ll mod(ll x){
+        return (x%M);
+    }
+ll add(ll a, ll b){
+        return mod(mod(a)+mod(b));
+    }
+ll mul(ll a, ll b){
+        return mod(mod(a)*mod(b));
+    }
+ll powr(ll a,ll b){
+   if(b==0)
+      return 1;
+   if(b==1)
+      return a;
+   ll res=1;
+   while(b>0){
+    if(b&1){
+        res*=a;
+    }
+    b/=2;
+    a*=a;
+  }
+  return res;
+}
+bool cmp(pair<ll,ll>a,pair<ll,ll>b){
+   return a.second<b.second;
+}
+ll is[1000000];
+vector <ll> primes;
+void primegen(){
+    ll n,i,j,k,x,mx=1000000;
+    primes.push_back(2);
+    for(ll i=3;i<=mx;i+=2){
+        if(is[i]==0){
+         for(ll j=i*i;j<=mx;j+=2*i){
+          is[j]=1;
+         }
+       }
+    }
+    for(ll i=3;i<=mx;i+=2){
+        if(is[i]==0)
+            primes.push_back(i);
+    }
+}
+ll ncr(ll x,ll y){
+   ll ans=1,s=1;
+    while(s<=y){
+        ans*=(x-s+1);
+        ans/=s;
+        s++;
+    }
+  return ans;
+}
+void solve()
+{
+  ll n;
+   cin>>n;
+  string s1,s2;
+  cin>>s1>>s2;
+  ll a1=0,b1=0,c1=0,a2=0,b2=0,c2=0;
+  for(auto it:s1){
+       if(it=='a')
+        a1++;
+       else if(it=='b')
+        b1++;
+        else c1++;
+  }
+  for(auto it:s2){
+       if(it=='a')
+        a2++;
+       else if(it=='b')
+        b2++;
+        else c2++;
+  }
+  if((a1!=a2)||(b1!=b2)||(c1!=c2)){
+    cout<<"NO"<<endl;
+    return;
+  }
+  ll a=0,b=0,c=0;
+  ll i=0,j=0;
+  while(i<n){
+    char r=s2[i];
+  //  cout<<r<<endl;
+    if(r=='a'&&a>0){
+        a--;
+        i++;
+        continue;
+    }
+    else if(r=='b'&&b>0){
+        b--;
+        i++;
+        continue;
+    }
+     else if(j>=n){
+      cout<<"NO"<<endl;
+        return;
+    }
+    while(j<n){
+      //  cout<<r<<' '<<i<<' '<<j<<endl;
+        if(r=='c'){
+           //cout<<"ff"<<j<<endl;
+            if(s1[j]=='a'||a>0){
+                cout<<"NO"<<endl;
+                return;
+            }
+            else if(s1[j]=='b'){
+                b++;
+                j++;
+            }
+            else{
+                j++;
+                i++;
+               // cout<<"d"<<i<<' '<<j<<endl;
+                break;
+            }
+        }
+        else if(r=='b'){
+            if(s1[j]=='c'||c>0){
+                cout<<"NO"<<endl;
+                return;
+            }
+            else if(s1[j]=='a'){
+                j++;
+                a++;
+            }
+            else{
+                j++;
+                i++;
+                break;
+            }
+        }
+        else{
+             if(b>0||c>0){
+                cout<<"NO"<<endl;
+                return;
+             }
+             if(s1[j]=='a'){
+                i++;
+                j++;
+              //  cout<<i<<' '<<j<<endl;
+                break;
+            }
+            else{
+                 // cout<<i<<' '<<j<<endl;
+                cout<<"NO"<<endl;
+                return;
+            }
+        }
+    }
+  }
+  cout<<"YES"<<endl;
+}
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    freopen("i.txt","r",stdin);
+    int t=1;
+    cin>>t;
+    for(int i=1;i<=t;i++){
+      //  cout<<"Case "<<i<<":"<<' ';
+        solve();
+    }
+    return 0;
+}

@@ -1,0 +1,6 @@
+When a single method name has alternatives implementations, it is called  overloading and when a method in child class overrides a method of parent class, it is called overriding.
+1.Overloading uses compile time mechanism but overriding uses runtime mechanism.
+  2.In overloading number of the parameter or the type must differ but in overriding type signature must match. 
+
+
+
